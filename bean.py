@@ -12,7 +12,7 @@ class Bean (pygame.sprite.Sprite):
     def player_input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
-            self.gravity = -20
+            self.gravity = -10
 
     def apply_gravity(self):
         self.gravity += 1
