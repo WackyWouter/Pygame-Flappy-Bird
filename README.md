@@ -1,2 +1,2 @@
 # Pygame-Flappy-Bird
-Remade flappy bird in pygame
+created flappy bird clone in pygame
