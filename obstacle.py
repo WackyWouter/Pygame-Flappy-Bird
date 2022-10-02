@@ -17,7 +17,9 @@ class Obstacle(pygame.sprite.Sprite):
             beam_down_2 = pygame.image.load('img/obstacles/beam-down2.png').convert_alpha()
             self.image = choice([beam_down_1, beam_down_2])
             self.rect = self.image.get_rect(midtop = (500, randint(-200, 0)))
-        
+            
+        self.mask = pygame.mask.from_surface(self.image)
+
     def update(self):
         self.rect.x -= 6
         self.destroy()

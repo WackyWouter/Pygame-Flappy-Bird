@@ -8,6 +8,7 @@ class Bean (pygame.sprite.Sprite):
         self.image = pygame.image.load('img/player/bean-small1.png').convert_alpha()
         self.rect = self.image.get_rect(center = (250, 386))
         self.gravity = 0
+        self.mask = pygame.mask.from_surface(self.image)
 
     def player_input(self):
         keys = pygame.key.get_pressed()
