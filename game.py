@@ -2,6 +2,7 @@ import pygame
 from bean import Bean
 from obstacle import Obstacle
 from debug import debug
+from random import randint
 
 class Game:
     def __init__(self):
@@ -85,6 +86,23 @@ class Game:
             return 'animating game over'
         return 'playing'
 
+    def calculate_beams(self, score):
+
+        # Make the gap smaller the higher the score
+        max_gap_size = 400 - int(score * 2)
+        min_gap_size = max_gap_size / 2
+
+        if max_gap_size < 100: max_gap_size = 100
+        if min_gap_size < 100: min_gap_size = 100
+
+        # create random size gap 
+        gap = randint(min_gap_size, max_gap_size)
+
+        # Calculate what y coordinate the up and down beams need to be
+        bot_y = randint(-339, 0)
+        up_y = bot_y + 400 + gap
+        return bot_y, up_y
+
     def run(self):
 
         while True:
@@ -97,15 +115,15 @@ class Game:
                 
                 # check if the user clicks the play button or presses space to start
                 if self.game_state == 'menu': 
-                    pos = pygame.mouse.get_pos()
                     if (event.type == pygame.MOUSEBUTTONUP and self.play_rect.collidepoint(event.pos)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE):
                         self.game_state = 'playing'
                         self.start_time = int(pygame.time.get_ticks() / 1000)
 
                 elif self.game_state == 'playing':
                     if event.type == self.obstacle_timer:
-                        self.obstacle_group.add(Obstacle('up')) 
-                        self.obstacle_group.add(Obstacle('down')) 
+                        bot_y, up_y = self.calculate_beams(self.score)
+                        self.obstacle_group.add(Obstacle('up', up_y)) 
+                        self.obstacle_group.add(Obstacle('down', bot_y)) 
                 
                 elif self.game_state == 'game over':
                     # Reset the game when its game over
@@ -121,11 +139,9 @@ class Game:
                         self.fail_music_channel.play(self.fail_music)
                         self.fail_music_channel.pause()
 
-
             self.screen.blit(self.sky_surf, (0, 0))
             self.bean.draw(self.screen)
             
-
             # Menu
             if self.game_state == 'menu':
                 self.screen.blit(self.play_surf, self.play_rect)
