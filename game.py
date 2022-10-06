@@ -3,14 +3,15 @@ from bean import Bean
 from obstacle import Obstacle
 from debug import debug
 from random import randint
+from sys import exit
 
 class Game:
     def __init__(self):
         # Setup
         pygame.init()
         pygame.display.set_caption('Flappy Bean')
-        self.font = pygame.font.Font('font/ka1.ttf', 30)
-        self.font_small = pygame.font.Font('font/ka1.ttf', 17)
+        self.font = pygame.font.Font('assets/font/ka1.ttf', 30)
+        self.font_small = pygame.font.Font('assets/font/ka1.ttf', 17)
         self.screen = pygame.display.set_mode((500, 772))
         self.clock = pygame.time.Clock()
         self.game_state = 'menu'
@@ -19,40 +20,40 @@ class Game:
         self.top_score = 0
 
         # Background
-        self.sky_surf = pygame.image.load('img/background/background.png').convert()
+        self.sky_surf = pygame.image.load('assets/img/background/background.png').convert()
         self.sky_surf = pygame.transform.scale(self.sky_surf, (500, 772))
-        self.floor_surf = pygame.image.load('img/background/floor.png').convert()
+        self.floor_surf = pygame.image.load('assets/img/background/floor.png').convert()
         self.floor_surf = pygame.transform.scale(self.floor_surf, (500, 111))
         self.floor_rect = self.floor_surf.get_rect(bottomleft = (0, 772))
 
         # Menu
-        self.play_surf = pygame.image.load('img/menu/play.png').convert_alpha()
+        self.play_surf = pygame.image.load('assets/img/menu/play.png').convert_alpha()
         self.play_rect = self.play_surf.get_rect(center = (250, 550))
-        self.game_name_surf = pygame.image.load('img/menu/game-name.png').convert_alpha()
+        self.game_name_surf = pygame.image.load('assets/img/menu/game-name.png').convert_alpha()
         self.game_name_rect = self.game_name_surf.get_rect(center = (250, 150))
 
         # Game over
-        self.game_over_surf = pygame.image.load('img/menu/gameover.png').convert_alpha()
+        self.game_over_surf = pygame.image.load('assets/img/menu/gameover.png').convert_alpha()
         self.game_over_rect = self.game_over_surf.get_rect(center = (250, -100))
-        self.score_screen_surf = pygame.image.load('img/menu/score.png').convert_alpha()
+        self.score_screen_surf = pygame.image.load('assets/img/menu/score.png').convert_alpha()
         self.score_screen_rect = self.score_screen_surf.get_rect(center = (250, 350))
-        self.gold_medal_surf = pygame.image.load('img/menu/gold.png').convert_alpha()
+        self.gold_medal_surf = pygame.image.load('assets/img/menu/gold.png').convert_alpha()
         self.gold_medal_rect = self.gold_medal_surf.get_rect(center = (197, 350))
-        self.silver_medal_surf = pygame.image.load('img/menu/silver.png').convert_alpha()
+        self.silver_medal_surf = pygame.image.load('assets/img/menu/silver.png').convert_alpha()
         self.silver_medal_rect = self.silver_medal_surf.get_rect(center = (197, 350))
         self.reset_game_surf = self.font_small.render('Press space to restart', False, (64,64,64))
         self.reset_game_rect = self.reset_game_surf.get_rect(center = (250, 425))
 
         # bg Music
         self.bg_music_channel = pygame.mixer.Channel(1)
-        self.bg_music = pygame.mixer.Sound('audio/music.wav')
+        self.bg_music = pygame.mixer.Sound('assets/audio/music.wav')
         self.bg_music.set_volume(0.1)
           # Play the audio forever
         self.bg_music_channel.play(self.bg_music, loops = -1)
 
         # Fail music
         self.fail_music_channel = pygame.mixer.Channel(2)
-        self.fail_music = pygame.mixer.Sound('audio/fail.wav')
+        self.fail_music = pygame.mixer.Sound('assets/audio/fail.wav')
         self.fail_music.set_volume(0.1)
         self.fail_music_channel.play(self.fail_music)
         self.fail_music_channel.pause()

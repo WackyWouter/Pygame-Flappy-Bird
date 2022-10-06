@@ -5,13 +5,13 @@ class Bean (pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        bean_image_1 = pygame.image.load('img/player/bean-small1.png').convert_alpha()
-        bean_image_2 = pygame.image.load('img/player/bean-small3.png').convert_alpha()
-        self.bean_dead = pygame.image.load('img/player/dead-bean.png').convert_alpha()
+        bean_image_1 = pygame.image.load('assets/img/player/bean-small1.png').convert_alpha()
+        bean_image_2 = pygame.image.load('assets/img/player/bean-small3.png').convert_alpha()
+        self.bean_dead = pygame.image.load('assets/img/player/dead-bean.png').convert_alpha()
 
         self.bean_fly = [bean_image_1, bean_image_2]
         self.bean_index = 0
-        self.player_jump = pygame.image.load('img/player/bean-small2.png').convert_alpha()
+        self.player_jump = pygame.image.load('assets/img/player/bean-small2.png').convert_alpha()
 
         self.image = self.bean_fly[self.bean_index]
         self.rect = self.image.get_rect(center = (250, 386))
