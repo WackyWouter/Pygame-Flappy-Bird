@@ -13,7 +13,7 @@ class Obstacle(pygame.sprite.Sprite):
             beam_up_2 = pygame.image.load('assets/img/obstacles/beam-up2.png').convert_alpha()
             beam_up_2 = pygame.transform.scale(beam_up_2, (49, 400))
             beam_up_3 = pygame.image.load('assets/img/obstacles/beam-up3.png').convert_alpha()
-            beam_up_3 = pygame.transform.scale(beam_up_3, (49, 400))
+            beam_up_3 = pygame.transform.scale(beam_up_3, (50, 400))
             self.image = choice([beam_up_1, beam_up_2, beam_up_3])
         else:
             beam_down_1 = pygame.image.load('assets/img/obstacles/beam-down1.png').convert_alpha()

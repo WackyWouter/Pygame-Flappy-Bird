@@ -1,7 +1,7 @@
 import pygame
-from bean import Bean
-from obstacle import Obstacle
-from debug import debug
+from assets.bean import Bean
+from assets.obstacle import Obstacle
+from assets.debug import debug
 from random import randint
 from sys import exit
 
